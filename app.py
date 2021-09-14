@@ -1,4 +1,4 @@
-from flask import Flask, render_template 
+from flask import Flask, render_template, request, redirect, url_for 
 from flask_sqlalchemy import SQLAlchemy
 
 #Convention
@@ -29,11 +29,18 @@ def about():
     return "This is about page"
 
 
+#this route won't ever be used- as the job of this function is to add new values to the db
+#Byt the route needs to be defined
+@app.route('/add', methods=["POST"])
+def add():
+    #Add new item
+    title = request.form.get("title")
+    new_todo = Todo(title= title, isComplete=False)
+    db.session.add(new_todo)
+    db.session.commit()
+    #Refresh the page - redirect
+    return redirect(url_for("index"))
+
 if __name__ == "__main__":
     db.create_all()
-    
-        #new_todo = Todo(title="Test1", isComplete=False)
-        #db.session.add(new_todo)
-        #db.session.commit()
-
     app.run(debug=True)
