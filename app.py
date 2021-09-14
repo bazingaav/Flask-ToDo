@@ -41,6 +41,25 @@ def add():
     #Refresh the page - redirect
     return redirect(url_for("index"))
 
+#update record: complete <-> not-complete
+@app.route('/update/<int:todo_id>')
+def update(todo_id):
+    #Update existing item
+    todo = Todo.query.filter_by(id=todo_id).first()
+    todo.isComplete = not todo.isComplete
+    db.session.commit()
+    return redirect(url_for("index"))
+
+#delete record
+@app.route('/delete/<int:todo_id>')
+def delete(todo_id):
+    #Update existing item
+    todo = Todo.query.filter_by(id=todo_id).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
