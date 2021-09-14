@@ -20,7 +20,8 @@ def index():
     #Show all todos
     todo_list = Todo.query.all()
     print(todo_list)
-    return render_template('index.html')
+    #using jinja template engine
+    return render_template('index.html', todo_list=todo_list)
 
 #About page
 @app.route('/about')
@@ -30,9 +31,9 @@ def about():
 
 if __name__ == "__main__":
     db.create_all()
-
-    new_todo = Todo(title="Test1", isComplete=False)
-    db.session.add(new_todo)
-    db.session.commit()
+    
+        #new_todo = Todo(title="Test1", isComplete=False)
+        #db.session.add(new_todo)
+        #db.session.commit()
 
     app.run(debug=True)
