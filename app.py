@@ -8,6 +8,11 @@ app = Flask(__name__)
 def index():
     return "Hello Earthlings!"
 
+#About page
+@app.route('/about')
+def about():
+    return "This is about page"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
