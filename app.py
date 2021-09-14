@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 #Convention
 app = Flask(__name__)
@@ -6,7 +6,7 @@ app = Flask(__name__)
 #Define index page
 @app.route('/')
 def index():
-    return "Hello Earthlings!"
+    return render_template('index.html')
 
 #About page
 @app.route('/about')
